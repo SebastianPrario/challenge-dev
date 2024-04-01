@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { statusOption, genderOption, speciesOption } from './../helpers/options'
+import { Button } from '../styles'
 
 export default function Filters ({ setFilter, filter }) {
   const [options, setOptions] = useState({
@@ -48,7 +49,7 @@ export default function Filters ({ setFilter, filter }) {
         <>{options.status}  </>
         <>{options.species}  </>
         <>{options.gender}</>
-        <button onClick={() => setFilter({ status: ' ', gender: '', species: '' })}>refresh</button>
+        <Button onClick={() => setFilter({ status: ' ', gender: '', species: '' })}>refresh</Button>
       </p>
     </div>
   )

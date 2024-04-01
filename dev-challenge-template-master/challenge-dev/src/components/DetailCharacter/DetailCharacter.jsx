@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { GET_CHARACTER } from '../../graphQl/queries/getAllCharactersQuery'
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
+import NavBar from '../NavBar/NavBar'
 
 export default function DetailCharacter () {
   const params = (useParams()).id
@@ -12,8 +13,7 @@ export default function DetailCharacter () {
   return (
 
     <div>
-
-      {loading
+       {loading
         ? <p>loagind...</p>
         : <div>
           {!data.character
@@ -26,9 +26,9 @@ export default function DetailCharacter () {
               </div>}
 
         </div>}
-        <button>
-            <Link to={`/`}>regresar</Link>
-            </button>
+      <button>
+        <Link to='/'>regresar</Link>
+      </button>
     </div>
 
   )

@@ -1,4 +1,4 @@
-import { useQuery, gql, useLazyQuery } from '@apollo/client'
+import { gql, useLazyQuery } from '@apollo/client'
 
 const ALL_CHARACTERS = gql`
 
@@ -46,17 +46,17 @@ export const GET_CHARACTER = gql`
         dimension
       }
       created
-  
   }
 }
 `
 export function getCharacter () {
-  const [getCharacterById, { data }] = useLazyQuery(FIND_CHARACTERS)
+  const [getCharacterById, { data }] = useLazyQuery(GET_CHARACTER)
   return {
     getCharacterById,
     data
   }
 }
+
 export function useGetAllCharactersQuery () {
   const [getCharacters, { data, fetchMore, refetch }] = useLazyQuery(ALL_CHARACTERS)
 
@@ -86,6 +86,7 @@ export function useGetAllCharactersQuery () {
   return {
     characters: data?.characters.results,
     count: data?.characters.results?.length || 0,
+    hasNext: typeof data?.characters.info.next === 'number',
     getCharacters,
     getMoreCharacters,
     refetch,

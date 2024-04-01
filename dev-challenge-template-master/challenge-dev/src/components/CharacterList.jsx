@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useQuery, gql, useLazyQuery } from '@apollo/client'
-import SearchByName from './SearchByName'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Filters from './Filters'
 import { useGetAllCharactersQuery } from '../graphQl/queries/getAllCharactersQuery'
-import DetailCard from './Card'
+import DetailCard from './Cards/Cards'
+import { Button } from '../styles'
+import NavBar from './NavBar/NavBar'
+import Modal from './Modal'
 
 export default function Cards () {
   const [characterName, setCharacterName] = useState('')
   const [filter, setFilter] = useState({ status: ' ', gender: '', species: '' })
+  const [ showModal, setShowModal ] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const {
     getCharacters,
     characters,
     count,
-    getMoreCharacters,
-  
+    hasNext,
+    getMoreCharacters
   } = useGetAllCharactersQuery()
-
+  console.log(hasNext)
   useEffect(() => {
     getCharacters({
       variables: {
@@ -28,30 +29,35 @@ export default function Cards () {
         characterName
       }
     })
+    setCurrentPage(1)
   }, [getCharacters, filter, characterName])
 
   const loadMore = () => {
-    getMoreCharacters(currentPage + 1, filter.gender , filter.status , filter.species , characterName)
+    getMoreCharacters(currentPage + 1, filter.gender, filter.status, filter.species, characterName)
     setCurrentPage(currentPage + 1)
   }
 
   return (
     <div>
-      <SearchByName setCharacter={setCharacterName} />
-      <Filters
-        setFilter={setFilter}
+      {!!showModal && <Modal setShowModal={setShowModal} showModal={showModal} />}
+      <NavBar
+        setCharacterName={setCharacterName}
         filter={filter}
+        setFilter={setFilter}
       />
       <InfiniteScroll
         dataLength={count}
         next={loadMore}
-        hasMore
+        hasMore={hasNext}
         loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Eso es todo!</b>
+          </p>
+        }
       >
-        <DetailCard characters={characters} />
+        <DetailCard characters={characters} onClick={setShowModal} />
       </InfiniteScroll>
-      <button onClick={loadMore}>agregar mas</button>
-
     </div>
   )
 }
