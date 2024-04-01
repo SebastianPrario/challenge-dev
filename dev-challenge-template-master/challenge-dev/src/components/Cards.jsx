@@ -4,7 +4,7 @@ import SearchByName from './SearchByName'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Filters from './Filters'
 import { useGetAllCharactersQuery } from '../graphQl/queries/getAllCharactersQuery'
-import DetailCard from './DetailCard'
+import DetailCard from './Card'
 
 export default function Cards () {
   const [characterName, setCharacterName] = useState('')

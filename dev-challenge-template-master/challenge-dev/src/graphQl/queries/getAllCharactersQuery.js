@@ -28,6 +28,35 @@ const ALL_CHARACTERS = gql`
 }
 `
 
+export const GET_CHARACTER = gql`
+
+  query  getCharacter ($id: ID!) {
+    character(id: $id)
+    {
+      id
+      name
+      status
+      species
+      type
+      gender
+      image
+      origin {
+        name
+        type
+        dimension
+      }
+      created
+  
+  }
+}
+`
+export function getCharacter () {
+  const [getCharacterById, { data }] = useLazyQuery(FIND_CHARACTERS)
+  return {
+    getCharacterById,
+    data
+  }
+}
 export function useGetAllCharactersQuery () {
   const [getCharacters, { data, fetchMore, refetch }] = useLazyQuery(ALL_CHARACTERS)
 
@@ -53,13 +82,14 @@ export function useGetAllCharactersQuery () {
       }
     })
   }
-  
+
   return {
     characters: data?.characters.results,
     count: data?.characters.results?.length || 0,
     getCharacters,
     getMoreCharacters,
-    refetch
+    refetch,
+    getCharacter
 
   }
 }
