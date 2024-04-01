@@ -1,59 +1,57 @@
-import React, { useState } from 'react'
-import { useQuery, gql } from '@apollo/client'
+import React, { useEffect, useState } from 'react'
+import { useQuery, gql, useLazyQuery } from '@apollo/client'
 import SearchByName from './SearchByName'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import Filters from './Filters'
+import { useGetAllCharactersQuery } from '../graphQl/queries/getAllCharactersQuery'
+import DetailCard from './DetailCard'
 
 export default function Cards () {
   const [characterName, setCharacterName] = useState('')
   const [filter, setFilter] = useState({ status: ' ', gender: '', species: '' })
-  const ALL_CHARACTERS = gql`
+  const [currentPage, setCurrentPage] = useState(1)
+  const {
+    getCharacters,
+    characters,
+    count,
+    getMoreCharacters,
+  
+  } = useGetAllCharactersQuery()
 
-  query  findCharacterByName {
-    characters(filter:{ 
-        name : "${characterName}"
-        status : "${filter.status}"
-        gender : "${filter.gender}"
-        species : "${filter.species}" 
+  useEffect(() => {
+    getCharacters({
+      variables: {
+        mypage: 1,
+        filterGender: filter.gender,
+        filterStatus: filter.status,
+        filterSpecies: filter.species,
+        characterName
+      }
     })
-    {results{
-      id
-      name
-      status
-      species
-      gender
-      image
-    }
-  }
-}
-`
+  }, [getCharacters, filter, characterName])
 
-  function GetCharacters () {
-    const { loading, error, data } = useQuery(ALL_CHARACTERS)
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error : {error.message}</p>
-
-    return data.characters.results.map(({ id, name, status, origin, image }) => (
-      <div key={id}>
-        <h3>{name}</h3>
-        <img width='200' height='200' alt='location-reference' src={`${image}`} />
-        <br />
-        <b>About this location:</b>
-        <p>{status}</p>
-        <br />
-      </div>
-    ))
+  const loadMore = () => {
+    getMoreCharacters(currentPage + 1, filter.gender , filter.status , filter.species , characterName)
+    setCurrentPage(currentPage + 1)
   }
+
   return (
     <div>
-      <SearchByName
-        setCharacter={setCharacterName}
-        characterName={characterName}
-      />
+      <SearchByName setCharacter={setCharacterName} />
       <Filters
         setFilter={setFilter}
         filter={filter}
       />
-      <GetCharacters />
+      <InfiniteScroll
+        dataLength={count}
+        next={loadMore}
+        hasMore
+        loader={<h4>Loading...</h4>}
+      >
+        <DetailCard characters={characters} />
+      </InfiniteScroll>
+      <button onClick={loadMore}>agregar mas</button>
+
     </div>
   )
 }

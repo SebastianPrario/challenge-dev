@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
+import { statusOption, genderOption, speciesOption } from './../helpers/options'
 
 export default function Filters ({ setFilter, filter }) {
-  const statusOption = ['Alive', 'unknown']
-  const genderOption = ['Alive', 'unknown']
-  const SpeciesOption = ['Alive', 'unknown']
-
   const [options, setOptions] = useState({
     status: '',
     species: '',
@@ -41,7 +38,7 @@ export default function Filters ({ setFilter, filter }) {
       </select>
       <select name='species' value={options.species} onChange={handleSeleccion}>
         <option value=''>species</option>
-        {SpeciesOption.map((elem) => (
+        {speciesOption.map((elem) => (
           <option key={elem}>
             {elem}
           </option>
@@ -51,6 +48,7 @@ export default function Filters ({ setFilter, filter }) {
         <>{options.status}  </>
         <>{options.species}  </>
         <>{options.gender}</>
+        <button onClick={() => setFilter({ status: ' ', gender: '', species: '' })}>refresh</button>
       </p>
     </div>
   )
