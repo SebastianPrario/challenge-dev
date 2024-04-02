@@ -4,10 +4,11 @@ const SearchContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 5%;
+	margin: 12px;
   background-color: black;
   padding: 8px;
   border-radius: 4px;
+  border: 2px solid white;
 `
 
 const SearchButton = styled.button`

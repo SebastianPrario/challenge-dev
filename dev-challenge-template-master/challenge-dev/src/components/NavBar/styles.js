@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const NavMenu = styled.header`
-    padding: 2px;
+   
+    padding-bottom: 10px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -9,6 +10,6 @@ export const NavMenu = styled.header`
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: greenyellow;
+    background-color: black;
     align-items: center;
 `

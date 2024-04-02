@@ -9,7 +9,7 @@ export default function NavBar ({ setCharacterName, setFilter, filter }) {
       <SearchByName setCharacter={setCharacterName} />
       <Filters
         setFilter={setFilter}
-        filter={filter}
+        setCharacterName={setCharacterName}
       />
     </NavMenu>
   )

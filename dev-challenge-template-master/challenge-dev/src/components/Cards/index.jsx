@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { CharactersContainer } from '../../styles'
+import { CharactersContainer } from './style'
 import Card from '../Card'
 
 export default function DetailCard ({ characters, onClick }) {

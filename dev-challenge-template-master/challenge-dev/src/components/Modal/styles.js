@@ -27,16 +27,22 @@ const CloseButton = styled.button`
 `
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
 `
 
 const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+ text-align: center;
+  flex: 1;
+  width: 10%;
 `
-
-
-
 export default { Container, CloseButton, TextContainer, ModalContent, ModalWrapper }

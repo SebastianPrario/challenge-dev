@@ -1,24 +1,5 @@
 import styled from 'styled-components'
 
-export const CharactersContainer = styled.div`
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-gap: 25px;
-    margin-left: 2%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    @media screen and (max-width: 800px){
-      margin-left: 10%;
-      grid-template-columns: repeat(2,1fr)
-    }
-    @media screen and (max-width: 500px){
-      margin-left: 20%;
-      
-      grid-template-columns: repeat(1,1fr)
-    }
-
-`
-
 export const CharacterCard = styled.div`
     position: relative;
     height: 280px;
@@ -52,18 +33,10 @@ export const Characterinfo = styled.div`
 `
 
 export const Button = styled.button`
-    border: none;
-    background-color: #47e31e;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    padding: 0.7rem 1.2rem;
-    border-radius: 40px;
-    outline: none;
-    cursor: pointer;
-
-    &:hover{
-    background-color: #30a812}
-
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
 `

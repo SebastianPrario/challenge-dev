@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useGetAllCharactersQuery } from '../graphQl/queries/getAllCharactersQuery'
-import DetailCard from './Cards/Cards'
-import { Button } from '../styles'
+import DetailCard from './Cards'
 import NavBar from './NavBar/NavBar'
 import Modal from './Modal'
 
@@ -45,7 +44,7 @@ export default function Cards () {
         filter={filter}
         setFilter={setFilter}
       />
-      <InfiniteScroll
+      <InfiniteScroll style={{marginTop:'100px'}}
         dataLength={count}
         next={loadMore}
         hasMore={hasNext}
