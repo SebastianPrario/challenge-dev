@@ -1,38 +1,43 @@
-import { gql, useLazyQuery } from '@apollo/client'
+import { gql, useLazyQuery } from '@apollo/client';
 
 const ALL_CHARACTERS = gql`
-
-  query  findCharacterByName ($mypage: Int! , $characterName: String , $filterStatus: String , $filterGender: String , $filterSpecies: String ) {
-    characters(page: $mypage , filter:{ 
-        name : $characterName
-        status : $filterStatus
-        gender : $filterGender
-        species : $filterSpecies 
-    })
-    {
-    info {
+  query findCharacterByName(
+    $mypage: Int!
+    $characterName: String
+    $filterStatus: String
+    $filterGender: String
+    $filterSpecies: String
+  ) {
+    characters(
+      page: $mypage
+      filter: {
+        name: $characterName
+        status: $filterStatus
+        gender: $filterGender
+        species: $filterSpecies
+      }
+    ) {
+      info {
         count
         pages
         prev
         next
-    }
-    results{
-      id
-      name
-      status
-      species
-      gender
-      image
+      }
+      results {
+        id
+        name
+        status
+        species
+        gender
+        image
+      }
     }
   }
-}
-`
+`;
 
 export const GET_CHARACTER = gql`
-
-  query  getCharacter ($id: ID!) {
-    character(id: $id)
-    {
+  query getCharacter($id: ID!) {
+    character(id: $id) {
       id
       name
       status
@@ -46,19 +51,20 @@ export const GET_CHARACTER = gql`
         dimension
       }
       created
+    }
   }
-}
-`
-export function getCharacter () {
-  const [getCharacterById, { data }] = useLazyQuery(GET_CHARACTER)
+`;
+export function getCharacter() {
+  const [getCharacterById, { data }] = useLazyQuery(GET_CHARACTER);
   return {
     getCharacterById,
-    data
-  }
+    data,
+  };
 }
 
-export function useGetAllCharactersQuery () {
-  const [getCharacters, { data, fetchMore, refetch }] = useLazyQuery(ALL_CHARACTERS)
+export function useGetAllCharactersQuery() {
+  const [getCharacters, { data, fetchMore, refetch }] =
+    useLazyQuery(ALL_CHARACTERS);
 
   const getMoreCharacters = (nextPageNumber, gender, status, species, name) => {
     fetchMore({
@@ -67,21 +73,24 @@ export function useGetAllCharactersQuery () {
         filterGender: gender,
         filterStatus: status,
         filterSpecies: species,
-        characterName: name
+        characterName: name,
       },
       updateQuery: (prevResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prevResult
+        if (!fetchMoreResult) return prevResult;
 
         return {
           ...prevResult,
           characters: {
             ...prevResult.characters,
-            results: [...prevResult.characters.results, ...fetchMoreResult.characters.results]
-          }
-        }
-      }
-    })
-  }
+            results: [
+              ...prevResult.characters.results,
+              ...fetchMoreResult.characters.results,
+            ],
+          },
+        };
+      },
+    });
+  };
 
   return {
     characters: data?.characters.results,
@@ -90,7 +99,6 @@ export function useGetAllCharactersQuery () {
     getCharacters,
     getMoreCharacters,
     refetch,
-    getCharacter
-
-  }
+    getCharacter,
+  };
 }

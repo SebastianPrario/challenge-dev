@@ -1,15 +1,13 @@
-import React from 'react'
-import { CharactersContainer } from './style'
-import Card from '../Card'
+import React from 'react';
+import { CharactersContainer } from './style';
+import Card from '../Card';
 
-export default function DetailCard ({ characters, onClick }) {
+export default function DetailCard({ characters, onClick }) {
   return (
     <CharactersContainer>
-      {characters?.map(elem => {
-        return (
-          <Card key={elem.id} elem={elem} onClick={onClick} />
-        )
-      })}
+      {characters?.map((elem) => (
+        <Card key={elem.id} elem={elem} onClick={onClick} />
+      ))}
     </CharactersContainer>
-  )
+  );
 }

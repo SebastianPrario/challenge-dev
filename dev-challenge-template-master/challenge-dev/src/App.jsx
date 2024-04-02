@@ -1,18 +1,14 @@
-import { Route, Routes } from 'react-router-dom'
-import CharacterList from './components/CharacterList.jsx'
-import DetailCharacter from './components/DetailCharacter/DetailCharacter'
-import GlobalStyles from './GlobalStyles.js'
+import React from 'react';
+import CharacterContainer from './containers/CharactersContainer';
+import GlobalStyles from './GlobalStyles';
 
-function App () {
+function App() {
   return (
     <>
       <GlobalStyles />
-      <Routes>
-        <Route path='/' element={<CharacterList />} />
-        <Route path='/detail/:id' element={<DetailCharacter />} />
-      </Routes>
+      <CharacterContainer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

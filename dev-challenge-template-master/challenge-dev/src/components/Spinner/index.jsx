@@ -1,36 +1,30 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-const Spinner = () => (
-  <StyledSpinner viewBox='0 0 50 50'>
-    <circle
-      className='path'
-      cx='25'
-      cy='25'
-      r='20'
-      fill='none'
-      strokeWidth='4'
-    />
-  </StyledSpinner>
-)
+const SpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Asegúrate de que el contenedor ocupe toda la altura de la vista */
+`;
 
 const StyledSpinner = styled.svg`
   animation: rotate 2s linear infinite;
-  margin: -25px 0 0 -25px;
   width: 50px;
   height: 50px;
-  
+
   & .path {
-    stroke: #5652BF;
+    stroke: #5652bf;
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }
-  
+
   @keyframes rotate {
     100% {
       transform: rotate(360deg);
     }
   }
+
   @keyframes dash {
     0% {
       stroke-dasharray: 1, 150;
@@ -45,6 +39,21 @@ const StyledSpinner = styled.svg`
       stroke-dashoffset: -124;
     }
   }
-`
+`;
 
-export default Spinner
+const Spinner = () => (
+  <SpinnerContainer>
+    <StyledSpinner viewBox='0 0 50 50'>
+      <circle
+        className='path'
+        cx='25'
+        cy='25'
+        r='20'
+        fill='none'
+        strokeWidth='4'
+      />
+    </StyledSpinner>
+  </SpinnerContainer>
+);
+
+export default Spinner;

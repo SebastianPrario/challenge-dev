@@ -1,0 +1,64 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "airbnb-base",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": ["react", "prettier"],
+    "rules": {
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never"
+        }
+      ],
+      "import/prefer-default-export": "off",
+      "import/no-cycle": ["off"],
+      "import/no-extraneous-dependencies": ["off"],
+      "no-debugger": ["warn"],
+      "no-console": [
+        "warn",
+        {
+          "allow": ["tron"]
+        }
+      ],
+      "react/prop-types": "off",
+      "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
+      "jsx-quotes": ["off"],
+      "no-use-before-define": "off",
+      "no-shadow": "off",
+      "prettier/prettier": [
+        "error",
+        { "endOfLine": "auto" },
+        {
+          "usePrettierrc": true
+        }
+      ]
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx"]
+        },
+        "alias": {
+          "map": [["@", "./src"]],
+          "extensions": [".js", ".jsx", ".json"]
+        }
+      },
+      "react": {
+        "version": "17.0"
+      }
+    }
+  }
+  

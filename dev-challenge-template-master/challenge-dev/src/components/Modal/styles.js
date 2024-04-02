@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -11,38 +11,35 @@ const ModalWrapper = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1001;
-`
+
+  @media screen and (max-width: 500px) {
+    position: fixed;
+    width: auto;
+    margin: 0 20px 0 20px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
 
 const ModalContent = styled.div`
+  position: relative;
   background-color: white;
   border-radius: 8px;
+  max-height: 600px;
+  min-width: 400px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`
+`;
 
 const CloseButton = styled.button`
-  text-align: end;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   border: none;
   background: none;
   cursor: pointer;
-`
+`;
 
-const Container = styled.div`
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    width: 500px;
-    height: 200px;
-    margin: 0 auto;
-`
-
-const TextContainer = styled.div`
- display: flex;
- flex-direction: column;
- align-content: center;
- text-align: center;
-  flex: 1;
-  width: 10%;
-`
-export default { Container, CloseButton, TextContainer, ModalContent, ModalWrapper }
+export default {
+  CloseButton,
+  ModalContent,
+  ModalWrapper,
+};
