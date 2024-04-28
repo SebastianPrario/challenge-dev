@@ -52,7 +52,7 @@ function CharactersContainer() {
         <Modal setShowModal={setShowModal} showModal={showModal} />
       )}
       <NavBar>
-        <h2 style={{ color: 'white' }}>Challenge Kimcha</h2>
+        <h2 style={{ color: 'white' }}>Rick and Morty Api</h2>
         <SearchByName
           character={characterName}
           setCharacter={setCharacterName}
